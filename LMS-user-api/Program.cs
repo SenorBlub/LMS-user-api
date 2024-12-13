@@ -6,17 +6,37 @@ using Logic.Models;
 using Logic.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+Env.Load();
+
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(corsPolicyBuilder =>
+	{
+		corsPolicyBuilder.WithOrigins(Env.GetString("FRONT_END_URL"))
+			.AllowAnyHeader()
+			.AllowAnyMethod()
+			.AllowCredentials()
+			.SetIsOriginAllowed(_ => true);
+	});
+});
+
+var connectionString =
+	$"Server={Env.GetString("DB_HOST")};Database={Env.GetString("DB_NAME")};User Id={Env.GetString("DB_USER")};Password={Env.GetString("DB_PASSWORD")};";
+
 builder.Services.AddDbContext<UserDbContext>(options =>
 	options.UseMySql(
-		builder.Configuration.GetConnectionString("DefaultConnection"),
-		new MySqlServerVersion(new Version(8, 4, 3))
+		builder.Configuration.GetConnectionString(connectionString),
+		new MySqlServerVersion(new Version(Env.GetInt("SQL_MAJOR"), Env.GetInt("SQL_MINOR"), Env.GetInt("SQL_BUILD")))
 	)
 );
+
+//!TODO auth
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
