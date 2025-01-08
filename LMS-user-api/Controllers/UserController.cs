@@ -196,7 +196,7 @@ namespace LMS_user_api.Controllers
 			return Ok();
 		}
 
-		[HttpPost("login")]
+		[HttpPost("email-login")]
 		public async Task<IActionResult> LoginUserAsync(string email, string password)
 		{
 			if(await _userService.LoginUserAsync(email, password))
