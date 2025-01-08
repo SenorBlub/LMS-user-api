@@ -205,10 +205,10 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpPost("login")]
-		public async Task<IActionResult> LoginUserAsync([FromBody] Guid userId, string password)
+		public async Task<IActionResult> LoginUserAsync([FromBody] Guid UserId, string Password)
 		{
-			if (await _userService.LoginUserAsync(userId, password))
-				return Ok(userId);
+			if (await _userService.LoginUserAsync(UserId, Password))
+				return Ok(UserId);
 			return BadRequest();
 		}
 	}
