@@ -18,6 +18,8 @@ public class UserDbContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+		base.OnModelCreating(modelBuilder);
+
 		// User Entity
 		modelBuilder.Entity<User>(entity =>
 		{
