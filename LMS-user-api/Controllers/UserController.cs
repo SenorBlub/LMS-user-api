@@ -17,7 +17,7 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpGet("{userId}")]
-		public async Task<IActionResult> Get(Guid userId)
+		public async Task<IActionResult> Get([FromRoute] Guid userId)
 		{
 			try
 			{
@@ -31,7 +31,7 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpGet("by-name/{userName}")]
-		public async Task<IActionResult> GetByName(string userName)
+		public async Task<IActionResult> GetByName([FromRoute] string userName)
 		{
 			try
 			{
@@ -57,7 +57,7 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpPut("{userId}")]
-		public async Task<IActionResult> Update(Guid userId, [FromBody] User user)
+		public async Task<IActionResult> Update([FromRoute] Guid userId, [FromBody] User user)
 		{
 			try
 			{
@@ -71,7 +71,7 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpPut("by-name/{userName}")]
-		public async Task<IActionResult> UpdateByName(string userName, [FromBody] User user)
+		public async Task<IActionResult> UpdateByName([FromRoute] string userName, [FromBody] User user)
 		{
 			try
 			{
@@ -85,7 +85,7 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpDelete("{userId}")]
-		public async Task<IActionResult> Delete(Guid userId)
+		public async Task<IActionResult> Delete([FromRoute] Guid userId)
 		{
 			try
 			{
@@ -99,7 +99,7 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpDelete("by-name/{userName}")]
-		public async Task<IActionResult> DeleteByName(string userName)
+		public async Task<IActionResult> DeleteByName([FromRoute] string userName)
 		{
 			try
 			{
@@ -113,91 +113,91 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpGet("{userId}/activities")]
-		public async Task<IActionResult> GetUserActivities(Guid userId)
+		public async Task<IActionResult> GetUserActivities([FromRoute] Guid userId)
 		{
 			var activities = await _userService.GetActivitiesAsync(userId);
 			return Ok(activities);
 		}
 
 		[HttpGet("by-name/{userName}/activities")]
-		public async Task<IActionResult> GetUserActivitiesByName(string userName)
+		public async Task<IActionResult> GetUserActivitiesByName([FromRoute] string userName)
 		{
 			var activities = await _userService.GetActivitiesByNameAsync(userName);
 			return Ok(activities);
 		}
 
 		[HttpGet("{userId}/content")]
-		public async Task<IActionResult> GetUserContent(Guid userId)
+		public async Task<IActionResult> GetUserContent([FromRoute] Guid userId)
 		{
 			var content = await _userService.GetContentAsync(userId);
 			return Ok(content);
 		}
 
 		[HttpGet("by-name/{userName}/content")]
-		public async Task<IActionResult> GetUserContentByName(string userName)
+		public async Task<IActionResult> GetUserContentByName([FromRoute] string userName)
 		{
 			var content = await _userService.GetContentByNameAsync(userName);
 			return Ok(content);
 		}
 
 		[HttpGet("{userId}/plans")]
-		public async Task<IActionResult> GetUserPlans(Guid userId)
+		public async Task<IActionResult> GetUserPlans([FromRoute] Guid userId)
 		{
 			var plans = await _userService.GetPlansAsync(userId);
 			return Ok(plans);
 		}
 
 		[HttpGet("by-name/{userName}/plans")]
-		public async Task<IActionResult> GetUserPlansByName(string userName)
+		public async Task<IActionResult> GetUserPlansByName([FromRoute] string userName)
 		{
 			var plans = await _userService.GetPlansByNameAsync(userName);
 			return Ok(plans);
 		}
 
 		[HttpPost("{userId}/connect-plan/{planId}")]
-		public async Task<IActionResult> ConnectUserPlan(Guid userId, Guid planId)
+		public async Task<IActionResult> ConnectUserPlan([FromRoute] Guid userId, Guid planId)
 		{
 			await _userService.ConnectUserPlanAsync(userId, planId);
 			return Ok();
 		}
 
 		[HttpDelete("{userId}/disconnect-plan/{planId}")]
-		public async Task<IActionResult> DisconnectUserPlan(Guid userId, Guid planId)
+		public async Task<IActionResult> DisconnectUserPlan([FromRoute] Guid userId, Guid planId)
 		{
 			await _userService.DisconnectUserPlanAsync(userId, planId);
 			return Ok();
 		}
 
 		[HttpPost("{userId}/connect-activity/{activityId}")]
-		public async Task<IActionResult> ConnectUserActivity(Guid userId, Guid activityId)
+		public async Task<IActionResult> ConnectUserActivity([FromRoute] Guid userId, Guid activityId)
 		{
 			await _userService.ConnectUserActivityAsync(userId, activityId);
 			return Ok();
 		}
 
 		[HttpDelete("{userId}/disconnect-activity/{activityId}")]
-		public async Task<IActionResult> DisconnectUserActivity(Guid userId, Guid activityId)
+		public async Task<IActionResult> DisconnectUserActivity([FromRoute] Guid userId, Guid activityId)
 		{
 			await _userService.DisconnectUserActivityAsync(userId, activityId);
 			return Ok();
 		}
 
 		[HttpPost("{userId}/connect-content/{contentId}")]
-		public async Task<IActionResult> ConnectUserContent(Guid userId, Guid contentId)
+		public async Task<IActionResult> ConnectUserContent([FromRoute] Guid userId, Guid contentId)
 		{
 			await _userService.ConnectUserContentAsync(userId, contentId);
 			return Ok();
 		}
 
 		[HttpDelete("{userId}/disconnect-content/{contentId}")]
-		public async Task<IActionResult> DisconnectUserContent(Guid userId, Guid contentId)
+		public async Task<IActionResult> DisconnectUserContent([FromRoute] Guid userId, Guid contentId)
 		{
 			await _userService.DisconnectUserContentAsync(userId, contentId);
 			return Ok();
 		}
 
 		[HttpPost("email-login")]
-		public async Task<IActionResult> LoginUserAsync(string email, string password)
+		public async Task<IActionResult> LoginUserAsync([FromBody] string email, string password)
 		{
 			if(await _userService.LoginUserAsync(email, password))
 				return Ok(_userService.GetByEmailAsync(email).Result.Id);
@@ -205,7 +205,7 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpPost("login")]
-		public async Task<IActionResult> LoginUserAsync(Guid userId, string password)
+		public async Task<IActionResult> LoginUserAsync([FromBody] Guid userId, string password)
 		{
 			if (await _userService.LoginUserAsync(userId, password))
 				return Ok(userId);
