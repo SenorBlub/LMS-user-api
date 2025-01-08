@@ -34,7 +34,8 @@ var connectionString =
 builder.Services.AddDbContext<UserDbContext>(options =>
 	options.UseMySql(
 		connectionString,
-		new MySqlServerVersion(new Version(Env.GetInt("SQL_MAJOR"), Env.GetInt("SQL_MINOR"), Env.GetInt("SQL_BUILD")))
+		new MySqlServerVersion(new Version(Env.GetInt("SQL_MAJOR"), Env.GetInt("SQL_MINOR"), Env.GetInt("SQL_BUILD"))),
+		mySqlOptions => mySqlOptions.EnableRetryOnFailure()
 	)
 );
 
