@@ -37,6 +37,8 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 		new MySqlServerVersion(new Version(Env.GetInt("SQL_MAJOR"), Env.GetInt("SQL_MINOR"), Env.GetInt("SQL_BUILD"))),
 		mySqlOptions => mySqlOptions.EnableRetryOnFailure()
 	)
+		.EnableDetailedErrors()
+		.EnableSensitiveDataLogging()
 );
 
 //!TODO auth
