@@ -31,15 +31,15 @@ public class UserDbContext : DbContext
 				.IsRequired();
 
 			entity.Property(u => u.Username)
-				.HasMaxLength(255)
+				.HasColumnType("VARCHAR(255)")
 				.IsRequired();
 
 			entity.Property(u => u.Email)
-				.HasMaxLength(255)
+				.HasColumnType("VARCHAR(255)")
 				.IsRequired();
 			
 			entity.Property(u => u.Password)
-				.HasMaxLength(255)
+				.HasColumnType("VARCHAR(255)")
 				.IsRequired();
 
 			// Relationships
