@@ -29,7 +29,7 @@ builder.Services.AddCors(options =>
 });
 
 var connectionString =
-	$"Server={Env.GetString("DB_HOST")};Database={Env.GetString("DB_NAME")};Uid={Env.GetString("DB_USER")};Pwd={Env.GetString("DB_PASSWORD")};";
+	$"Server={Env.GetString("DB_HOST")};Database={Env.GetString("DB_NAME")};User={Env.GetString("DB_USER")};Password={Env.GetString("DB_PASSWORD")};";
 
 builder.Services.AddDbContext<UserDbContext>(options =>
 	options.UseMySql(
