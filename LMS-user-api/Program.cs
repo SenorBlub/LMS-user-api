@@ -29,7 +29,9 @@ builder.Services.AddCors(options =>
 });
 
 var connectionString =
-	$"Server={Env.GetString("DB_HOST")};Database={Env.GetString("DB_NAME")};Uid={Env.GetString("DB_USER")};Pwd={Env.GetString("DB_PASSWORD")};SslMode=none;";
+	$"Server={Env.GetString("DB_HOST")};Database={Env.GetString("DB_NAME")};Uid={Env.GetString("DB_USER")};Pwd={Env.GetString("DB_PASSWORD")};";
+
+Console.WriteLine(connectionString);
 
 builder.Services.AddDbContext<UserDbContext>(options =>
 	options.UseMySql(
@@ -37,8 +39,6 @@ builder.Services.AddDbContext<UserDbContext>(options =>
 		new MySqlServerVersion(new Version(Env.GetInt("SQL_MAJOR"), Env.GetInt("SQL_MINOR"), Env.GetInt("SQL_BUILD"))),
 		mySqlOptions => mySqlOptions.EnableRetryOnFailure()
 	)
-		.EnableDetailedErrors()
-		.EnableSensitiveDataLogging()
 );
 
 //!TODO auth
