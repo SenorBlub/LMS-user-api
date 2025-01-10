@@ -209,7 +209,7 @@ namespace LMS_user_api.Controllers
 		public async Task<IActionResult> LoginUserAsync([FromBody] AuthRequest request)
 		{
 			if (await _userService.LoginUserAsync(request.UserId, request.Password))
-				return Ok(request.UserId);
+				return Ok(request);
 			return BadRequest();
 		}
 	}
