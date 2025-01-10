@@ -204,10 +204,10 @@ public class UserService : IUserService
 		return true;
 	}
 
-	public async Task<bool> LoginUserAsync(Guid userId, string password)
+	public async Task<bool> LoginUserAsync(Guid UserId, string Password)
 	{
-		User user = GetAsync(userId).Result;
-		var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
+		User user = GetAsync(UserId).Result;
+		var result = _passwordHasher.VerifyHashedPassword(user, user.Password, Password);
 		if(result != PasswordVerificationResult.Success)
 			return false;
 		return true;
