@@ -206,7 +206,7 @@ public class UserService : IUserService
 
 	public async Task<bool> LoginUserAsync(Guid UserId, string Password)
 	{
-		User user = GetAsync(UserId).Result;
+		User user = await GetAsync(UserId);
 		var result = _passwordHasher.VerifyHashedPassword(user, user.Password, Password);
 		if(result != PasswordVerificationResult.Success)
 			return false;
