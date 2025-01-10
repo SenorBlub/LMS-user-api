@@ -8,7 +8,7 @@ public class User
 
 	public string Password { get; set; }
 
-	public ICollection<UserPlan> UserPlans { get; set; }
-	public ICollection<UserActivity> UserActivities { get; set; }
-	public ICollection<UserContent> UserContents { get; set; }
+	public ICollection<UserPlan>? UserPlans { get; set; }
+	public ICollection<UserActivity>? UserActivities { get; set; }
+	public ICollection<UserContent>? UserContents { get; set; }
 }
