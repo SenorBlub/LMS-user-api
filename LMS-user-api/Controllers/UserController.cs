@@ -51,6 +51,7 @@ namespace LMS_user_api.Controllers
 			{
 				return BadRequest("User object cannot be null.");
 			}
+			user.Id = Guid.NewGuid();
 
 			await _userService.CreateAsync(user);
 			return CreatedAtAction(nameof(Get), new { userId = user.Id }, user);
