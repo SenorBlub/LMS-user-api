@@ -19,26 +19,26 @@ public class UserDbContext : DbContext
 		// User Entity
 		modelBuilder.Entity<User>(entity =>
 		{
-			entity.ToTable("users");
+			entity.ToTable("Users");
 			entity.HasKey(u => u.Id);
 
 			entity.Property(u => u.Id)
-				.HasColumnName("id")
+				.HasColumnName("Id")
 				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(u => u.Username)
-				.HasColumnName("username")
+				.HasColumnName("Username")
 				.HasColumnType("varchar(255)")
 				.IsRequired();
 
 			entity.Property(u => u.Email)
-				.HasColumnName("email")
+				.HasColumnName("Email")
 				.HasColumnType("varchar(255)")
 				.IsRequired();
 
 			entity.Property(u => u.Password)
-				.HasColumnName("password")
+				.HasColumnName("Password")
 				.HasColumnType("varchar(255)")
 				.IsRequired();
 		});
@@ -46,21 +46,21 @@ public class UserDbContext : DbContext
 		// UserPlan Entity
 		modelBuilder.Entity<UserPlan>(entity =>
 		{
-			entity.ToTable("user_plans");
+			entity.ToTable("UserPlans");
 			entity.HasKey(up => up.Id);
 
 			entity.Property(up => up.Id)
-				.HasColumnName("id")
+				.HasColumnName("Id")
 				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(up => up.UserId)
-				.HasColumnName("user_id")
+				.HasColumnName("UserId")
 				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(up => up.PlanId)
-				.HasColumnName("plan_id")
+				.HasColumnName("PlanId")
 				.HasColumnType("char(36)")
 				.IsRequired();
 		});
@@ -68,21 +68,21 @@ public class UserDbContext : DbContext
 		// UserActivity Entity
 		modelBuilder.Entity<UserActivity>(entity =>
 		{
-			entity.ToTable("user_activities");
+			entity.ToTable("UserActivities");
 			entity.HasKey(ua => ua.Id);
 
 			entity.Property(ua => ua.Id)
-				.HasColumnName("id")
+				.HasColumnName("Id")
 				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(ua => ua.UserId)
-				.HasColumnName("user_id")
+				.HasColumnName("UserId")
 				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(ua => ua.ActivityId)
-				.HasColumnName("activity_id")
+				.HasColumnName("ActivityId")
 				.HasColumnType("char(36)")
 				.IsRequired();
 		});
@@ -90,21 +90,21 @@ public class UserDbContext : DbContext
 		// UserContent Entity
 		modelBuilder.Entity<UserContent>(entity =>
 		{
-			entity.ToTable("user_contents");
+			entity.ToTable("UserContents");
 			entity.HasKey(uc => uc.Id);
 
 			entity.Property(uc => uc.Id)
-				.HasColumnName("id")
+				.HasColumnName("Id")
 				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(uc => uc.UserId)
-				.HasColumnName("user_id")
+				.HasColumnName("UserId")
 				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(uc => uc.ContentId)
-				.HasColumnName("content_id")
+				.HasColumnName("ContentId")
 				.HasColumnType("char(36)")
 				.IsRequired();
 		});
