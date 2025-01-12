@@ -1,16 +1,11 @@
 ﻿using Logic.Models;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql;
 
 namespace DAL.Contexts;
 
 public class UserDbContext : DbContext
 {
-	public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
-	{
-	}
+	public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
 
 	public DbSet<User> Users { get; set; }
 	public DbSet<UserPlan> UserPlans { get; set; }
@@ -24,96 +19,93 @@ public class UserDbContext : DbContext
 		// User Entity
 		modelBuilder.Entity<User>(entity =>
 		{
-			entity.ToTable("Users");
+			entity.ToTable("users");
 			entity.HasKey(u => u.Id);
 
 			entity.Property(u => u.Id)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(u => u.Username)
-				.HasColumnType("VARCHAR(255)")
+				.HasColumnName("username")
+				.HasColumnType("varchar(255)")
 				.IsRequired();
 
 			entity.Property(u => u.Email)
-				.HasColumnType("VARCHAR(255)")
+				.HasColumnName("email")
+				.HasColumnType("varchar(255)")
 				.IsRequired();
-			
+
 			entity.Property(u => u.Password)
-				.HasColumnType("VARCHAR(255)")
+				.HasColumnName("password")
+				.HasColumnType("varchar(255)")
 				.IsRequired();
-
-			// Relationships
-			entity.HasMany(u => u.UserPlans)
-				.WithOne()
-				.HasForeignKey(up => up.UserId)
-				.IsRequired(false);
-
-			entity.HasMany(u => u.UserActivities)
-				.WithOne()
-				.HasForeignKey(ua => ua.UserId)
-				.IsRequired(false);
-
-			entity.HasMany(u => u.UserContents)
-				.WithOne()
-				.HasForeignKey(uc => uc.UserId)
-				.IsRequired(false);
 		});
 
 		// UserPlan Entity
 		modelBuilder.Entity<UserPlan>(entity =>
 		{
-			entity.ToTable("UserPlan");
+			entity.ToTable("user_plans");
 			entity.HasKey(up => up.Id);
 
 			entity.Property(up => up.Id)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(up => up.UserId)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("user_id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(up => up.PlanId)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("plan_id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 		});
 
 		// UserActivity Entity
 		modelBuilder.Entity<UserActivity>(entity =>
 		{
-			entity.ToTable("UserActivity");
+			entity.ToTable("user_activities");
 			entity.HasKey(ua => ua.Id);
 
 			entity.Property(ua => ua.Id)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(ua => ua.UserId)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("user_id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(ua => ua.ActivityId)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("activity_id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 		});
 
 		// UserContent Entity
 		modelBuilder.Entity<UserContent>(entity =>
 		{
-			entity.ToTable("UserContent");
+			entity.ToTable("user_contents");
 			entity.HasKey(uc => uc.Id);
 
 			entity.Property(uc => uc.Id)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(uc => uc.UserId)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("user_id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 
 			entity.Property(uc => uc.ContentId)
-				.HasColumnType("VARCHAR(36)")
+				.HasColumnName("content_id")
+				.HasColumnType("char(36)")
 				.IsRequired();
 		});
 	}
