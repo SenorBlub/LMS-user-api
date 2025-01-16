@@ -21,13 +21,13 @@ public class UserRepository : IUserRepository
 	public async Task<User> GetByNameAsync(string userName)
 	{
 		return await _context.Users
-			.FirstOrDefaultAsync(u => u.Username == userName);
+			.FirstOrDefaultAsync(u => u.Username.ToLower() == userName.ToLower());
 	}
 
 	public async Task<User> GetByEmailAsync(string email)
 	{
 		return await _context.Users
-			.FirstOrDefaultAsync(u => u.Email == email);
+			.FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
 	}
 
 	public async Task CreateAsync(User user)

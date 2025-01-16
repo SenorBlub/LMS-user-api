@@ -197,7 +197,7 @@ public class UserService : IUserService
 
 	public async Task<bool> LoginUserAsync(string email, string password)
 	{
-		User user = GetByEmailAsync(email).Result;
+		User user = await GetByEmailAsync(email);
 		var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
 		if (result != PasswordVerificationResult.Success)
 			return false;
