@@ -198,10 +198,10 @@ namespace LMS_user_api.Controllers
 		}
 
 		[HttpPost("email-login")]
-		public async Task<IActionResult> LoginUserAsync([FromBody] string email, string password)
+		public async Task<IActionResult> LoginUserAsync([FromBody] EmailAuthRequest emailAuthRequest)
 		{
-			if(await _userService.LoginUserAsync(email, password))
-				return Ok(_userService.GetByEmailAsync(email).Result.Id);
+			if(await _userService.LoginUserAsync(emailAuthRequest.Email, emailAuthRequest.Password))
+				return Ok(_userService.GetByEmailAsync(emailAuthRequest.Email).Result.Id);
 			return BadRequest();
 		}
 
